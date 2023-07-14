@@ -21,6 +21,9 @@ switch ($route->controller) {
     case "account":
         $output = view("view.php",array());
         break;
+    case "clubs": 
+        $output = view("clubs_view.php",array());
+        break;
 }
 
 echo view("theme.php",array("content"=>$output));
