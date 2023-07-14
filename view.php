@@ -35,7 +35,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <div style="font-size:30px; float:right; color: #FFDC00"><i class="fa fa-bolt"></i>0.7kW</div>
+                        <div style="font-size:30px; float:right; color: #FFDC00"><i class="fa fa-bolt"></i>&nbsp;0.7kW</div>
                         <h5 class="card-title">Live usage</h5>
                         <p class="card-text">Last updated 14:38</p>
                     </div>
