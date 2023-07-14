@@ -13,7 +13,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <i class="fa fa-smile" style="font-size:50px; float:right; color: #27c93f"></i>
+                        <i class="fa fa-smile" style="font-size:50px; float:left; color: #27c93f">&nbsp;</i>
                         <h5 class="card-title">It's a good time to use power</h5>
                         <p class="card-text">Hydro is generating 50 kW</p>
 
@@ -23,24 +23,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="" style="font-size:30px; float:right; color: #27c93f">£0.26/kWh</div>
-                        <h5 class="card-title">Current Price</h5>
-                        <p class="card-text">Estimated</p>
+                        <i class="fa fa-bolt" style="font-size:50px; float:left; color: #ffdc00;">&nbsp;</i>
+                        <div style="float: left;">
+                          <h5 class="card-title">Live usage</h5>
+                          <p class="card-text">Last updated 14:38</p>
+                        </div>
+                        <div style="font-size:40px; float: right; color: #ffdc00;">
+                          0.7kW
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div style="font-size:30px; float:right; color: #FFDC00"><i class="fa fa-bolt"></i>&nbsp;0.7kW</div>
-                        <h5 class="card-title">Live usage</h5>
-                        <p class="card-text">Last updated 14:38</p>
-                    </div>
-                </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa fa-pound-sign" style="font-size:50px; float:left; color: #3B6358;">&nbsp;</i>
+                <div class="" style="font-size:40px; float:right; color: #3B6358;">26p/kWh</div>
+                <h5 class="card-title">Current Price</h5>
+                <p class="card-text">Estimated</p>
+              </div>
             </div>
+          </div>
         </div>
     </div>
     <br>
