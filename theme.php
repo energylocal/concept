@@ -103,7 +103,7 @@
     </div>
 
     <footer class="footer sticky-footer bg-custom text-light">
-        <div class="container">An <b>OpenEnergyMonitor.org</b> community initiative
+        <div class="container">
             EnergyLocal
         </div>
     </footer>
