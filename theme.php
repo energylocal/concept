@@ -8,7 +8,6 @@
     <link href="https://openenergymonitor.org/homepage/theme/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <style>
