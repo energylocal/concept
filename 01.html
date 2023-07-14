@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HeatpumpMonitor.org</title>
+    <link rel="stylesheet" href="http://localhost/heatpumpmonitororg/theme/style.css?v=12" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link href="https://openenergymonitor.org/homepage/theme/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<style>
+    .bg-custom {
+        background-color: #44b3e2;
+        /* Replace with your custom color value */
+    }
+
+    .navbar-brand {
+        font-size: 22px;
+        /* Replace with your desired font size */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        /* Replace with your desired font size */
+    }
+
+    .navbar .navbar-nav .nav-link i {
+        margin-right: 0.5rem;
+        font-size: 25px;
+    }
+
+    .navbar-text-desktop {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer {
+
+        padding: 20px;
+        text-align: center;
+    }
+
+    @media (min-width: 992px) {
+        .nav-item-text {
+            display: none;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .navbar-text-desktop {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    var path = "http://localhost/heatpumpmonitororg/";
+</script>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><b>HeatpumpMonitor</b>.org</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <span class="navbar-text navbar-text-desktop">An open source initiative to share and compare heat
+                        pump performance data.</span>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/."
+                                title="Home"><i class="fas fa-home"></i> <span class="nav-item-text">Home</span></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/stats"
+                                title="30 Day Stats"><i class="fas fa-table"></i> <span class="nav-item-text">30 Day
+                                    Stats</span></a></li>
+                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/costs"
+                                title="Running Costs"><i class="fas fa-coins"></i> <span class="nav-item-text">Running
+                                    Costs</span></a></li>
+                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/graph"
+                                title="Comparison Charts"><i class="fas fa-chart-line"></i> <span
+                                    class="nav-item-text">Comparison Charts</span></a></li>
+                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/compare"
+                                title="Comparison Charts"><i class="fas fa-object-group"></i> <span
+                                    class="nav-item-text">Comparison Charts</span></a></li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="avatarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img width="32" height="32" class="rounded-circle avatar-image">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
+                                <li><a class="dropdown-item" href="http://localhost/heatpumpmonitororg/user/view">My
+                                        account</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/heatpumpmonitororg/system/list">My
+                                        systems</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="http://localhost/heatpumpmonitororg/user/admin">Admin
+                                        users</a></li>
+                                <li><a class="dropdown-item"
+                                        href="http://localhost/heatpumpmonitororg/system/admin">Admin systems</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="http://localhost/heatpumpmonitororg/user/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex-grow-1">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+        <div id="app" class="bg-light">
+            <div style=" background-color:#f0f0f0; padding-top:20px; padding-bottom:10px">
+                <div class="container">
+                    <h3 v-if="!admin">My Systems</h3>
+
+                    <button class="btn btn-primary btn-sm" @click="create" style="float:right; margin-right:30px">Add
+                        new system</button>
+                    <p v-if="!admin">Add, edit and view systems associated with your account.</p>
+                </div>
+            </div>
+
+            <br>
+
+            <!-- 3 bootstrap cards in equally spaced columns -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                          <div class="card-body">
+                            <i class="fa fa-smile" style="font-size:50px; float:right; color: #27c93f"></i>
+                            <h5 class="card-title">It's a good time to use power</h5>
+                            <p class="card-text">Hydro is generating 50 kW</p>
+                            
+                            <!--<h1><i class="fa fa-meh" style="color:#E6602B"></i></h1>
+                            <h1><i class="fa fa-frown" style="color: #c20000;"></i></h1>-->
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="" style="font-size:30px; float:right; color: #27c93f">£0.26/kWh</div>
+                            <h5 class="card-title">Current Price</h5>
+                            <p class="card-text">Estimated</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card">
+                          <div class="card-body">
+                             <div style="font-size:30px; float:right; color: #FFDC00"><i class="fa fa-bolt"></i>0.7kW</div>
+                            <h5 class="card-title">Live usage</h5>
+                            <p class="card-text">Last updated 14:38</p>
+                          </div>
+                        </div>
+                      </div>     
+                </div>
+            </div>
+            <br>
+            
+            <!-- list of buttons Today, Week, Month, Year, ALl all using outline and not grouped-->
+            <div class="container">
+                <div class="input-group" role="group" aria-label="Basic outlined example" style="width:500px">
+                    <button type="button" class="btn btn-outline-primary">Day</button>
+                    <button type="button" class="btn btn-outline-primary active">Week</button>
+                    <button type="button" class="btn btn-outline-primary">Month</button>
+                    <button type="button" class="btn btn-outline-primary">Year</button>
+                    <button type="button" class="btn btn-outline-primary">All</button>
+
+                    <button type="button" class="btn btn-outline-primary"><i class="fa fa-arrow-left"></i></button>
+                    <input type="text" class="form-control" placeholder="Text here">
+                    <button type="button" class="btn btn-outline-primary"><i class="fa fa-arrow-right"></i></button>
+                </div>
+
+                <div class="btn-group" role="group" aria-label="Basic outlined example" style="float:right; margin-left:20px">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-chart-bar"></i></button>
+                    <button type="button" class="btn btn-outline-primary"><i class="fa fa-chart-pie"></i></button>
+                </div>
+
+                <div class="btn-group" role="group" aria-label="Basic outlined example" style="float:right;">
+                    <button type="button" class="btn btn-primary">kWh</button>
+                    <button type="button" class="btn btn-outline-primary">£</button>
+                </div>
+
+
+            </div>
+
+            <div class="container">
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer sticky-footer bg-custom text-light">
+        <div class="container">
+            An <b>OpenEnergyMonitor.org</b> community initiative
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost/heatpumpmonitororg/Lib/md5.js"></script>
+    <script>
+        // Include gravitar profile image
+        var avatar = document.getElementsByClassName("avatar-image");
+        avatar[0].src = "https://www.gravatar.com/avatar/" + CryptoJS.MD5("") + "?s=32&d=mm";
+    </script>
+<script>
+    var options = {
+        colors_style_guidlines: ['#29ABE2', '#3B6358', '#27C93F', '#C92760'],
+        colors: ['#29AAE3', '#59643B', '#FFB401', '#E6602B'],
+        chart: {
+            type: 'bar',
+            stacked: true,
+            height: 450,
+        },
+        series: [{
+            name: 'Hydro',
+            data: [30, 33, 35, 50, 49, 60, 70]
+        },
+        {
+            name: 'Overnight',
+            data: [43, 41, 35, 50, 49, 60, 70]
+        },
+        {
+            name: 'Daytime',
+            data: [22, 35, 35, 50, 49, 60, 70]
+        },
+        {
+            name: 'Evening',
+            data: [15, 38, 35, 50, 49, 60, 70]
+        }],
+        xaxis: {
+            categories_foo: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+            categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+        }
+    }
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+    chart.render();
+</script>
+</body>
+
+</html>
