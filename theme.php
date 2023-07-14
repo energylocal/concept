@@ -108,7 +108,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="http://localhost/heatpumpmonitororg/Lib/md5.js"></script>
+    <script src="md5.js"></script>
     <script>
         // Include gravitar profile image
         var avatar = document.getElementsByClassName("avatar-image");
