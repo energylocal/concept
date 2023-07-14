@@ -64,30 +64,18 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><b>HeatpumpMonitor</b>.org</a>
+                <a class="navbar-brand" href="#"><b>EnergyLocal</b> Dashboard</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <span class="navbar-text navbar-text-desktop">An open source initiative to share and compare heat
-                        pump performance data.</span>
+                    <span class="navbar-text navbar-text-desktop">Transforming the electricity market for communities and small-scale renewable generators</span>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/."
                                 title="Home"><i class="fas fa-home"></i> <span class="nav-item-text">Home</span></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/stats"
-                                title="30 Day Stats"><i class="fas fa-table"></i> <span class="nav-item-text">30 Day
-                                    Stats</span></a></li>
-                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/costs"
-                                title="Running Costs"><i class="fas fa-coins"></i> <span class="nav-item-text">Running
-                                    Costs</span></a></li>
-                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/graph"
-                                title="Comparison Charts"><i class="fas fa-chart-line"></i> <span
-                                    class="nav-item-text">Comparison Charts</span></a></li>
-                        <li class="nav-item"><a class="nav-link " href="http://localhost/heatpumpmonitororg/compare"
-                                title="Comparison Charts"><i class="fas fa-object-group"></i> <span
-                                    class="nav-item-text">Comparison Charts</span></a></li>
+                        
                     </ul>
 
                     <ul class="navbar-nav">
@@ -131,11 +119,7 @@
         <div id="app" class="bg-light">
             <div style=" background-color:#f0f0f0; padding-top:20px; padding-bottom:10px">
                 <div class="container">
-                    <h3 v-if="!admin">My Systems</h3>
-
-                    <button class="btn btn-primary btn-sm" @click="create" style="float:right; margin-right:30px">Add
-                        new system</button>
-                    <p v-if="!admin">Add, edit and view systems associated with your account.</p>
+                    <h3 v-if="!admin">My Account</h3>
                 </div>
             </div>
 
@@ -188,9 +172,9 @@
                     <button type="button" class="btn btn-outline-primary">Year</button>
                     <button type="button" class="btn btn-outline-primary">All</button>
 
-                    <button type="button" class="btn btn-outline-primary"><i class="fa fa-arrow-left"></i></button>
+                    <button type="button" class="btn btn-outline-secondary"><i class="fa fa-arrow-left"></i></button>
                     <input type="text" class="form-control" placeholder="Text here">
-                    <button type="button" class="btn btn-outline-primary"><i class="fa fa-arrow-right"></i></button>
+                    <button type="button" class="btn btn-outline-secondary"><i class="fa fa-arrow-right"></i></button>
                 </div>
 
                 <div class="btn-group" role="group" aria-label="Basic outlined example" style="float:right; margin-left:20px">
@@ -214,7 +198,7 @@
 
     <footer class="footer sticky-footer bg-custom text-light">
         <div class="container">
-            An <b>OpenEnergyMonitor.org</b> community initiative
+            EnergyLocal
         </div>
     </footer>
 
@@ -232,7 +216,10 @@
         chart: {
             type: 'bar',
             stacked: true,
-            height: 450,
+            height: 500,
+            toolbar: {
+                show: false
+            }
         },
         series: [{
             name: 'Hydro',
