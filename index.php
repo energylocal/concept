@@ -1,29 +1,51 @@
 <?php
-define('EMONCMS_EXEC', 1);
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+require "Lib/load_database.php";
 
 require "core.php";
 require "route.php";
+require("Modules/user/user_model.php");
+$user = new User($mysqli);
 
 $path = get_application_path(false);
 $route = new Route(get('q'), server('DOCUMENT_ROOT'), server('REQUEST_METHOD'));
 
+$session = $user->emon_session_start();
+
 if ($route->controller=="") {
-    $route->controller = "account";
+    if ($session['userid']) {
+        $route->controller = "account";
+        $route->action = "view";
+    } else {
+        $route->controller = "user";
+        $route->action = "login";
+    }
 }
+
+$output = false;
 
 switch ($route->controller) {
     case "user":
-        $output = view("login.php",array());
+        require "Modules/user/user_controller.php";
+        $output = user_controller();
         break;
     case "account":
-        $output = view("view.php",array());
+        require "Modules/account/account_controller.php";
+        $output = account_controller();
         break;
     case "clubs": 
         $output = view("clubs_view.php",array());
         break;
 }
 
-echo view("theme.php",array("content"=>$output));
+switch ($route->format) {
+
+    case "html":
+        echo view("theme/theme.php", array("content"=>$output, "route"=>$route, "session"=>$session));
+        break;
+        
+    case "json":
+        header('Content-Type: application/json');
+        echo json_encode($output);   
+        break; 
+}

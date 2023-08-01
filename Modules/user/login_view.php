@@ -11,7 +11,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 
     <div class="row" style="color:#fff">
         <div class="col-6">
-            <h1><img src="energylocal_logo_120.png" style="width:80px" /> Energy<span style="color:#fff">Local</span></h1><br>
+            <h1><img src="<?php echo $path; ?>theme/energylocal_logo_120.png" style="width:80px" /> Energy<span style="color:#fff">Local</span></h1><br>
             <p style="color:#fff; font-size:18px; line-height:22px">Energy Local is transforming the electricity market for communities and small-scale renewable generators.<br><br>Our mission is to help communities get more value from renewable generation by using the electricity locally.</p>
         </div>
         <div class="col-4 ms-auto">
@@ -31,7 +31,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
                     </div>
 
                     <button type="button" class="btn btn-primary" @click="login">Login</button>
-                    &nbsp;<a href="#">Forgot password</a>
+                    <!--&nbsp;<a href="#">Forgot password</a>-->
 
                     <div class="alert alert-danger" style="margin-top:20px; margin-bottom: 5px;" v-if="error" v-html="error"></div>
                     <div class="alert alert-success" style="margin-top:20px; margin-bottom: 5px;" v-if="success" v-html="success"></div>
@@ -43,7 +43,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
     </div>
 <br><br>
     <div class="row" style="color:#fff">
-        <div class="col-4 blink">
+        <div class="col-4 blink" @click="window.location.href='<?php echo $path;?>clubs'" style="cursor:pointer">
             <h2><i class="fa-solid fa-location-dot" style="color:#29abe2"></i> Explore Clubs</h2>
             <p>EnergyLocal clubs are communities that are already using low cost local power.</p>
         </div>
@@ -80,7 +80,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
                 axios.post(path + "user/login.json", params)
                     .then(function(response) {
                         if (response.data.success) {
-                            window.location.href = path + "system/list";
+                            window.location.href = path + "account/view";
                         } else {
                             app.error = response.data.message;
                             app.success = false;
