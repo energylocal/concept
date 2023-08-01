@@ -1,4 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <div id="app" class="bg-light">
     <div style=" background-color:#f0f0f0; padding-top:20px; padding-bottom:10px">
@@ -96,31 +97,61 @@
                 show: false
             }
         },
-        series: [{
-                name: 'Hydro',
-                data: [30, 33, 35, 50, 49, 60, 70]
-            },
-            {
-                name: 'Overnight',
-                data: [43, 41, 35, 50, 49, 60, 70]
-            },
-            {
-                name: 'Daytime',
-                data: [22, 35, 35, 50, 49, 60, 70]
-            },
-            {
-                name: 'Evening',
-                data: [15, 38, 35, 50, 49, 60, 70]
+        dataLabels: {
+            enabled: false
+        },
+        series: [ ],
+        xaxis: { }
+    };
+
+    var chart = false;
+
+    // axios get account/data
+    axios.get(path+'account/data')
+        .then(function(response) {
+            console.log(response.data);
+
+            // data example:
+            // {"2023-07-02":{"time":1688252400,"demand":{"overnight":2.182,"daytime":0.021,"evening":0.071,"total":2.274}}}
+            
+            // loop through data and add to series
+            var overnight = [];
+            var daytime = [];
+            var evening = [];
+            var hydro = [];
+
+            var categories = [];
+            for (var key in response.data) {
+                var obj = response.data[key];
+                hydro.push(obj.generation.total);
+                overnight.push(obj.import.overnight);
+                daytime.push(obj.import.daytime);
+                evening.push(obj.import.evening);
+                categories.push(key);
             }
-        ],
-        xaxis: {
-            categories_foo: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-            categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-        }
-    }
+            options.series = [{
+                name: 'Hydro',
+                data: hydro
+            }, {
+                name: 'Overnight',
+                data: overnight
+            }, {
+                name: 'Daytime',
+                data: daytime
+            }, {
+                name: 'Evening',
+                data: evening
+            }];
+            options.xaxis.categories = categories;
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-
-    chart.render();
+            chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+        })
+        .catch(function(error) {
+            console.log(error);
+        })
+        .then(function() {
+            // always executed
+        });
 </script>
