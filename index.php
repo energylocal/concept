@@ -33,8 +33,9 @@ switch ($route->controller) {
         require "Modules/account/account_controller.php";
         $output = account_controller();
         break;
-    case "clubs": 
-        $output = view("clubs_view.php",array());
+    case "club":
+        require "Modules/club/club_controller.php";
+        $output = club_controller();
         break;
 }
 
